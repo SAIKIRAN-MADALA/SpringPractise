@@ -1,20 +1,23 @@
 package com.product.ProjectInfoGraphics.controller;
 
 import com.product.ProjectInfoGraphics.model.ProjectRequest;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.product.ProjectInfoGraphics.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/create")
 public class ProjectController {
 
-    @RequestMapping("/home")
-    public ProjectRequest sendRequest(){
-        return ProjectRequest.builder()
-                .ownerEmailId("saikiranmadala10@gmail.com")
-                .projectOwner("saikiran")
-                .projectDescription("Demo Project")
-                .projectDescription("Demo Project")
-                .build();
+    @Autowired
+    ProjectService projectService;
+
+    @PostMapping
+    public ResponseEntity<Long> createProject(@RequestBody ProjectRequest projectRequest){
+        long projectId = projectService.addProject(projectRequest);
+        return new ResponseEntity<>(projectId, HttpStatus.OK);
     }
 
 }

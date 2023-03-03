@@ -15,7 +15,7 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
 
     @Override
-    public long addProduct(ProjectRequest projectRequest) {
+    public long addProject(ProjectRequest projectRequest) {
         log.info("Adding Project ...{}");
         Project project
                 = Project.builder()
